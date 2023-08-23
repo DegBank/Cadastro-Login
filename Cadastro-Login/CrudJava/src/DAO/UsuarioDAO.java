@@ -34,6 +34,30 @@ public class UsuarioDAO {
 			return null;
 		}
 		
+	}
+	
+	public void cadastrarUsuario(UsuarioDTO objusuario) {
+		
+		con = new Conexao().conectaBD();
+		
+		String sql = "insert usuario (nome_usuario, senha_usuario) values (?,?)";
+		
+		try {
+			
+			PreparedStatement pstm = con.prepareStatement(sql);
+			pstm.setString(1, objusuario.getNome_usuario());
+			pstm.setString(2, objusuario.getSenha_usuario());
+			
+			pstm.execute();
+			pstm.close();
+			
+		}catch (Exception erro) {
+			
+			JOptionPane.showMessageDialog(null, "UsuarioDao: "  + erro.getMessage());
+
+
+		}
+		
 		
 	}
 
